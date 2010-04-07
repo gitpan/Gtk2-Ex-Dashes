@@ -1,0 +1,57 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.61.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+SHA1 842745cb706f8f2126506f544492f7a80dbe29b3 COPYING
+SHA1 f49c1c27f50631cbc9c60e167e83044f6b25b914 Changes
+SHA1 d2737645c763dd6899bcc762c1ef28428889d2c6 MANIFEST
+SHA1 e617c70ed81c4c1ef71318726b4eef701701979f MANIFEST.SKIP
+SHA1 cf48566710d403dd21603733ca361373479283e8 META.yml
+SHA1 f407112fa10abac942ff50bcccfc6c6b2b4fa9be Makefile.PL
+SHA1 cf5f93a352137d68864cdc9786c762f7f2ec1072 debian/changelog
+SHA1 ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 debian/compat
+SHA1 d8733946290a0e15900220f4c9577febc887139c debian/control
+SHA1 2ba69213378a2174725be1c9a3b5012977afdd5f debian/copyright
+SHA1 9dd98eb301fd29eb9e2eb223ca388126eb0b3a24 debian/rules
+SHA1 a022b41895e5e4911a22580adab4f7a81b3a4203 debian/watch
+SHA1 381d5b7a9cb26f649affd34ade6960a8925a4d17 devel/run.pl
+SHA1 b7eeeb21d252d0ef8dda37c2dc504b5191d1d267 devel/screenshot.pl
+SHA1 10da2709383421d99a4d7b6fcf6208b2f5551ca0 devel/tearoff.pl
+SHA1 38182dad5d0f6a63e9563133fcda743c42b368a2 devel/vert.pl
+SHA1 502befecaf42e2daec64e5ba7f9b2b6a7c01617a examples/settings.pl
+SHA1 5bd13e3c50a7104d941fa2f766c173aa9adf58cf examples/simple.pl
+SHA1 9614a299075559e83f704750b51c3a46e0ac520a examples/vertical.pl
+SHA1 d6ce1ed65009868d4a0e5b7ab1688a9fc0e9e162 inc/MyMakeMakerExtras.pm
+SHA1 63427b66eb26f013f10c835b0cf320c93361f310 inc/my_pod2html
+SHA1 f2e6c5390bf5fbfa7a1551da3a8da4dc34536a2f lib/Gtk2/Ex/Dashes.pm
+SHA1 00a2ddd6ad9e2ed6280751f9dc944f28b5269cec lib/Gtk2/Ex/Dashes/MenuItem.pm
+SHA1 11eda0347af48309996833a4da214197e31b85fb t/0-META-read.t
+SHA1 a343ed4dce96d05de51eed1ec065911584b96fce t/0-Test-DistManifest.t
+SHA1 bba0dc087cbe64d8f100ab77e6cef061c0bebf27 t/0-Test-Pod.t
+SHA1 5fa94e1e88e44064d1e6b21c88a4c9374a17bfd1 t/0-Test-Synopsis.t
+SHA1 9a19fa262c1cc6ee6afe638600ce880500a91946 t/0-Test-YAML-Meta.t
+SHA1 fd90855a253447db6083490749c84aa6b092a902 t/Dashes-weaken.t
+SHA1 ce7726a79fe8ed7a8376ed9a02c5289468fc6c3c t/Dashes.t
+SHA1 02dc242da05df51b6e75ed58166441df3d75339f t/MenuItem-weaken.t
+SHA1 40950667ec370d370a965c867cb40af7ffd8c03e t/MenuItem.t
+SHA1 e5b9059d5e27d380fc9418095d773ad5f96baa06 t/MyTestHelpers.pm
+SHA1 cb273d3779e0f6f085f6d5912eb8edf6fd000d38 t/Test/Weaken/Gtk2.pm
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iD8DBQFLvPP1LFMCIV9q3ToRAmzbAJ9WOVpTwaDHvD2SFE3xi7rnfduGEQCcC/KN
+upnWn6p35iqiWNvoWdZPBrE=
+=/aVq
+-----END PGP SIGNATURE-----

@@ -24,7 +24,7 @@ use Gtk2;
 # uncomment this to run the commented-out ### lines
 #use Smart::Comments;
 
-our $VERSION = 1;
+our $VERSION = 2;
 
 use Glib::Object::Subclass
   'Gtk2::MenuItem',

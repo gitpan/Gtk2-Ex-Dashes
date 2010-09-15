@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -w
 
 # Copyright 2010 Kevin Ryde
 
@@ -21,21 +21,17 @@
 use 5.008;
 use strict;
 use warnings;
-use Test::More tests => 15;
+use Test::More tests => 14;
 
-use FindBin;
-use File::Spec;
-use lib File::Spec->catdir($FindBin::Bin,'inc');
+use lib 't';
+use MyTestHelpers;
+BEGIN { MyTestHelpers::nowarnings() }
 
-BEGIN {
- SKIP: { eval 'use Test::NoWarnings; 1'
-           or skip 'Test::NoWarnings not available', 1; }
-}
+use Gtk2::Ex::Dashes::MenuItem;
 
-require Gtk2::Ex::Dashes::MenuItem;
-
+my $want_version = 2;
+my $check_version = $want_version + 1000;
 {
-  my $want_version = 1;
   is ($Gtk2::Ex::Dashes::MenuItem::VERSION, $want_version,
       'VERSION variable');
   is (Gtk2::Ex::Dashes::MenuItem->VERSION,  $want_version,
@@ -43,25 +39,20 @@ require Gtk2::Ex::Dashes::MenuItem;
 
   ok (eval { Gtk2::Ex::Dashes::MenuItem->VERSION($want_version); 1 },
       "VERSION class check $want_version");
-  my $check_version = $want_version + 1000;
   ok (! eval { Gtk2::Ex::Dashes::MenuItem->VERSION($check_version); 1 },
       "VERSION class check $check_version");
+}
 
+require Gtk2;
+MyTestHelpers::glib_gtk_versions();
+
+{
   my $item = Gtk2::Ex::Dashes::MenuItem->new;
   is ($item->VERSION, $want_version, 'VERSION object method');
   ok (eval { $item->VERSION($want_version); 1 },
       "VERSION object check $want_version");
   ok (! eval { $item->VERSION($check_version); 1 },
       "VERSION object check $check_version");
-}
-
-require Gtk2;
-use lib 't';
-require MyTestHelpers;
-MyTestHelpers::glib_gtk_versions();
-
-{
-  my $item = Gtk2::Ex::Dashes::MenuItem->new;
 }
 
 #-----------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -w
 
 # Copyright 2010 Kevin Ryde
 
@@ -101,24 +101,14 @@ foreach my $sname ('xthickness', 'ythickness') {
   $inner_hbox->pack_start ($spin, 0,0,0);
 
   my $adj = $style_adjustments{$sname} = $spin->get_adjustment;
-  $adj->signal_connect (value_changed => \&apply_style_adjustments);
+  $adj->signal_connect (value_changed => sub {
+                          my ($adj) = @_;
+                          my $rcstyle = $dashes->get_modifier_style;
+                          $rcstyle->$sname ($adj->value);
+                          $dashes->modify_style ($rcstyle);
+                        });
 }
-sub apply_style_adjustments {
-  my $xthickness = $style_adjustments{'xthickness'}->value;
-  my $ythickness = $style_adjustments{'ythickness'}->value;
-  my $name = $dashes->get_name;
 
-  # this can't be the right way to programmatically change style settings,
-  # can it?
-  Gtk2::Rc->parse_string (<<HERE);
-style "Gtk2__Ex__Dashes__example_settings_style" {
-  xthickness = $xthickness
-  ythickness = $ythickness
-}
-widget "*.$name" style:highest "Gtk2__Ex__Dashes__example_settings_style"
-HERE
-  $dashes->reset_rc_styles;
-}
 
 {
   my $button;  # radio grouping
@@ -131,16 +121,16 @@ HERE
     if ($dashes->get('orientation') eq $orientation) {
       $button->set_active (1);  # its initial value
     }
-    $button->signal_connect ('notify::active' => \&orientation_to_property,
-                             $orientation);
+    $button->signal_connect ('notify::active',
+                             sub {
+                               my ($button, $pspec) = @_;
+                               if ($button->get_active) {
+                                 $dashes->set (orientation => $orientation);
+                               }
+                             });
   }
 }
-sub orientation_to_property {
-  my ($button, $pspec, $orientation) = @_;
-  if ($button->get_active) {
-    $dashes->set (orientation => $orientation);
-  }
-}
+
 
 # dashes initially square according to the button vbox height
 # (see Gtk2::Ex::Units set_default_size_with_subsizes() for a general

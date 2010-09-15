@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -w
 
 # Copyright 2010 Kevin Ryde
 
@@ -19,24 +19,20 @@
 
 use strict;
 use warnings;
-use Gtk2::Ex::Dashes;
 use Test::More;
 
+use lib 't';
+use MyTestHelpers;
+BEGIN { MyTestHelpers::nowarnings() }
+
+use Gtk2::Ex::Dashes;
+
 # Test::Weaken 2 for leaks()
-BEGIN {
-  my $have_test_weaken = eval "use Test::Weaken 2; 1";
-  if (! $have_test_weaken) {
-    plan skip_all => "due to Test::Weaken 2 not available -- $@";
-  }
-  diag ("Test::Weaken version ", Test::Weaken->VERSION);
+eval "use Test::Weaken 2; 1"
+  or plan skip_all => "due to Test::Weaken 2 not available -- $@";
+diag ("Test::Weaken version ", Test::Weaken->VERSION);
 
-  plan tests => 2;
-
- SKIP: { eval 'use Test::NoWarnings; 1'
-           or skip 'Test::NoWarnings not available', 1; }
-}
-
-require Gtk2;
+plan tests => 1;
 
 {
   my $leaks = Test::Weaken::leaks (sub { Gtk2::Ex::Dashes->new });

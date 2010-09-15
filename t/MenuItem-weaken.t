@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -w
 
 # Copyright 2010 Kevin Ryde
 
@@ -22,24 +22,18 @@ use warnings;
 use Gtk2::Ex::Dashes::MenuItem;
 use Test::More;
 
-# Test::Weaken 3 for "contents"
-BEGIN {
-  my $have_test_weaken = eval "use Test::Weaken 3; 1";
-  if (! $have_test_weaken) {
-    plan skip_all => "due to Test::Weaken 3 not available -- $@";
-  }
-  diag ("Test::Weaken version ", Test::Weaken->VERSION);
-
-  plan tests => 2;
-
- SKIP: { eval 'use Test::NoWarnings; 1'
-           or skip 'Test::NoWarnings not available', 1; }
-}
-
-require Gtk2;
-
 use lib 't';
-require Test::Weaken::Gtk2;
+use MyTestHelpers;
+BEGIN { MyTestHelpers::nowarnings() }
+
+# Test::Weaken 3 for "contents"
+eval "use Test::Weaken 3;
+                               use Test::Weaken::Gtk2;
+                               1"
+  or plan skip_all => "due to Test::Weaken 3 and/or Test::Weaken::Gtk2 not available -- $@";
+diag ("Test::Weaken version ", Test::Weaken->VERSION);
+
+plan tests => 1;
 
 {
   my $leaks = Test::Weaken::leaks
